@@ -1,36 +1,21 @@
 import React from 'react'
 import {useState} from 'react'
+import { useCounter } from '../hooks/useCounter'
 
 const CounterApp = () => {
 
-    const [counter, setCounter] = useState(0)
+  const {counter, increment, decrement, reset} = useCounter(0)
+
   return (
     <div>
       <h1>
         CounterApp
       </h1>
-      <h2>
-        Counter: {counter}
-      </h2>
-      <button className = "btn btn-primary" onClick = {() => setCounter(counter + 1)}>
-        +1
-        </button>
-        <button className = "btn btn-primary"  onClick = {() => setCounter(counter - 1)}>
-        -1
-        </button>
-        <button className = "btn btn-primary"  onClick = {() => setCounter(counter + 100)}>
-        +100
-        </button>
-        <button className = "btn btn-primary"  onClick = {() => setCounter(counter + 10000)}>
-        +10000
-        </button>
-        <button className = "btn btn-primary"  onClick = {() => setCounter(counter - 10000)}>
-        -10000
-        </button>
-        <button className = "btn btn-primary" onClick = {() => setCounter(0)}>
-        Reset
-        </button>
-
+      <hr/>
+      <h2>Counter: {counter}</h2>
+      <button onClick={increment}>+1</button>
+      <button onClick={decrement}>-1</button>
+      <button onClick={reset}>Reset</button>
     </div>
   )
 }
