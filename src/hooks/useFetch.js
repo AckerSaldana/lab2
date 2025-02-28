@@ -29,14 +29,12 @@ const useFetch = () => {
     try {
       setLoading(true);
 
-      // Obtener el token solo si no existe
       let accessToken = token;
       if (!accessToken) {
         accessToken = await getSpotifyToken();
         setToken(accessToken);
       }
 
-      // Elegir un artista aleatorio en cada ejecución
       const randomQuery = reggaetonQueries[Math.floor(Math.random() * reggaetonQueries.length)];
 
       const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(randomQuery)}&type=track&limit=5`, {
@@ -65,19 +63,18 @@ const useFetch = () => {
     }
   };
 
-  // Obtener el token una sola vez al montar el componente
+  
   useEffect(() => {
     if (!token) {
       getSpotifyToken().then(setToken);
     }
   }, []);
 
-  // Ejecutar la búsqueda de canciones después de obtener el token
   useEffect(() => {
     if (token) {
       fetchData();
     }
-  }, [token]); // Solo cuando haya un token válido
+  }, [token]); 
 
   return { data, loading, error, refetch: fetchData };
 };
